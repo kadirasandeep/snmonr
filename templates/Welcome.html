@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Notes Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Simple Notes Management</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="buttons">
+
+            <a href="{{ url_for('register') }}">
+                <button type="button">Register</button>
+            </a>
+
+            <a href="{{ url_for('login') }}">
+                <button type="button">Login</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

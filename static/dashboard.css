@@ -1,0 +1,129 @@
+*{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        /* Navbar */
+        .navbar{
+            background:linear-gradient(135deg,#6a11cb,#2575fc);
+            padding:0 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            height:70px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo{
+            color:white;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .nav-links{
+            list-style:none;
+            display:flex;
+            align-items:center;
+        }
+
+        .nav-links li{
+            position:relative;
+        }
+
+        .nav-links li a{
+            display:block;
+            padding:20px;
+            color:white;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .nav-links li a:hover{
+            background:rgba(255,255,255,0.15);
+        }
+
+        /* Dropdown */
+        .dropdown-content{
+            display:none;
+            position:absolute;
+            top:60px;
+            left:0;
+            min-width:220px;
+            background:white;
+            border-radius:8px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+            z-index:100;
+        }
+
+        .dropdown-content a{
+            color:#333 !important;
+            padding:12px 15px !important;
+            display:block;
+        }
+
+        .dropdown-content a:hover{
+            background:#f0f0f0;
+        }
+
+        .dropdown:hover .dropdown-content{
+            display:block;
+        }
+
+        /* Search */
+        .search-box{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .search-box input{
+            padding:8px 12px;
+            border:none;
+            border-radius:5px;
+            outline:none;
+            width:220px;
+        }
+
+        .search-btn{
+            padding:8px 15px;
+            border:none;
+            border-radius:5px;
+            background:white;
+            color:#2575fc;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .search-btn:hover{
+            background:#e6e6e6;
+        }
+
+        /* Main Content */
+        .container{
+            padding:40px;
+        }
+
+        .welcome-card{
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .welcome-card h1{
+            color:#2575fc;
+            margin-bottom:15px;
+        }
+
+        .welcome-card p{
+            color:#555;
+            font-size:18px;
+        }
