@@ -24,26 +24,35 @@ Session(app)
 def home():
     return render_template('Welcome.html')
 
-@app.route('/register',methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method=='POST':
         username=request.form['username']
         useremail=request.form['useremail']
         userpassword=request.form['password']
-        gotp=genotp()
-        userdetails={
-            'username':username,
-            'useremail':useremail,
-            'userpassword':userpassword,'userotp':gotp
-        }
-        subject='user validation for SNM'
-        body=f"use the otp {gotp} to validate your email for SNM"
-        send_mail(to=useremail,subject=subject,body=body)
-        flash('otp sent to your given  email')
-        return redirect(url_for('otpverify',serverdata=endata(data=userdetails)))
-        
-
+        try:
+            cursor=mydb.cursor(buffered=True)
+            cursor.execute('select count(*) from userdata where useremail=%s',[useremail])
+            email_count=cursor.fetchone()[0] #(1,) or (0,) or None
+            cursor.close()
+        except Exception as e:
+            print(e)
+            flash('Could not verify email')
+            return redirect(url_for('register'))
+        else:
+            if email_count==0:
+                gotp=genotp() #calling the function
+                userdetails={'username':username,'useremail':useremail,'userpassword':userpassword,'userotp':gotp}
+                subject='User validation OTP for SNM'
+                body=f'Use the give otp {gotp}'
+                send_mail(to=useremail,subject=subject,body=body)
+                flash('OTP has been sent given mail')
+                return redirect(url_for('otpverify',serverdata=endata(data=userdetails)))
+            elif email_count==1:
+                flash('Email already existed')
+                return redirect(url_for('register'))
     return render_template('registerform.html')
+
 @app.route('/otpverify/<serverdata>',methods=['GET','POST'])
 def otpverify(serverdata):
     if request.method=='POST':
@@ -73,6 +82,7 @@ def otpverify(serverdata):
     return render_template('otp.html')
 # @app.route('/login',methods=['GET','POST'])
 @app.route('/login', methods=['GET', 'POST'])
+
 def login():
     if request.method == 'POST':
         login_useremail = request.form['useremail']
