@@ -33,14 +33,14 @@
                         View
                     </a>
 
-                    <a href="{{url_for('updatenotes', nid=i[0]) }}"
-                        class="btn update-btn">
-                            Update
+                    <a href="{{url_for('updatenotes',nid=i[0])}}"
+                       class="btn update-btn">
+                        Update
                     </a>
 
-                    <a href="{{ url_for('deletefile', fid=i[0]) }}"
-                        class="btn delete-btn"
-                        onclick="return confirm('Are you sure you want to delete this file?')">
+                    <a href="{{url_for('deletenotes',nid=i[0])}}"
+                       class="btn delete-btn"
+                       onclick="return confirm('Are you sure you want to delete this note?')">
                         Delete
                     </a>
 

@@ -5,16 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='login.css') }}">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#6a11cb,#2575fc);
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            width:350px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            color:#333;
+        }
+
+        .form-group{
+            margin-bottom:15px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:5px;
+            font-weight:bold;
+            color:#555;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus{
+            border-color:#2575fc;
+            box-shadow:0 0 5px rgba(37,117,252,0.5);
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2575fc;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1a5edb;
+        }
+
+        .login-link{
+            text-align:center;
+            margin-top:15px;
+        }
+
+        .login-link a{
+            text-decoration:none;
+            color:#2575fc;
+            font-weight:bold;
+        }
+
+        .login-link a:hover{
+            text-decoration:underline;
+        }
+    </style>
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}    
+    {% for message in messages %}
+      <center>{{ message }}</center>
+    {% endfor %}    
+  {% endif %}
+{% endwith %}
 <body>
 
     <div class="container">
         <h2>Login</h2>
 
-        <form action="/login" method="POST">
-
+        <form  method="POST">
             <div class="form-group">
                 <label for="useremail">Email</label>
                 <input
@@ -22,7 +112,8 @@
                     id="useremail"
                     name="useremail"
                     placeholder="Enter Email"
-                    required>
+                    required
+                >
             </div>
 
             <div class="form-group">
@@ -32,23 +123,22 @@
                     id="password"
                     name="password"
                     placeholder="Enter Password"
-                    required>
-            </div>
-
-            <!-- Forgot Password Link -->
-            <div class="forgot-password">
-                <a href="{{ url_for('forgotpassword') }}">Forgot Password?</a>
+                    required
+                >
             </div>
 
             <button type="submit">Login</button>
 
             <div class="login-link">
-                New Account?
+                New account?
                 <a href="/register">Register</a>
+            </div>
+            <div class="login-link">
+                Forgotpassword
+                <a href="#">Forgotpassword</a>
             </div>
 
         </form>
-
     </div>
 
 </body>

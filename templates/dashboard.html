@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-
-    <link rel="stylesheet"
-          href="{{url_for('static',filename='dashboard.css')}}"/>
-
+    {% block title %}<title>Dashboard</title>{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static',filename='dashboard.css')}}"/>
     {% block addcss %}{% endblock %}
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -27,7 +25,7 @@
                 <div class="dropdown-content">
                     <a href="{{url_for('addnotes')}}">Add Notes</a>
                     <a href="{{url_for('viewallnotes')}}">View All Notes</a>
-                    <a href="{{url_for('Getexceldata')}}">Get Excel Data</a>
+                    <a href="#">Get Excel Data</a>
                 </div>
             </li>
 
@@ -36,61 +34,46 @@
                 <a href="#">Files ▼</a>
 
                 <div class="dropdown-content">
-                    <a href="{{ url_for('fileupload')}}">Upload File</a>
-                    <a href="{{url_for('viewallfiles')}}">View All Files</a>
+                    <a href="{{ url_for('fileupload') }}">Upload File</a>
+                    <a href="{{ url_for('viewallfiles') }}">View All Files</a>       
+                            <a href="{{ url_for('Getexceldata') }}">Get Excel Data</a>            </li>
+            
                 </div>
             </li>
+
+            
 
             <!-- Logout -->
             <li>
-                <a href="{{url_for('logout')}}">Logout</a>
-            </li>
-
+                <a href="{{ url_for('logout') }}">Logout</a>
         </ul>
-
         {{session.get('user')}}
 
         <div class="search-box">
-        <form action="{{ url_for('search') }}" method="GET">
-
-        <input
-            type="text"
-            name="query"
-            placeholder="Search notes or files..."
-            required
-        >
-
-        <button type="submit" class="search-btn">
-            Search
-        </button>
-
-    </form>
-</div>
+            <form action="{{ url_for('search') }}" method="GET">                <input
+                    type="text"
+                    name="query"
+                    placeholder="Search notes or files..."
+                >
+                <button type="submit" class="search-btn">
+                    Search
+                </button>
+            </form>
+        </div>
 
     </nav>
-
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div style="
-                    background-color:#d4edda;
-                    color:#155724;
-                    padding:10px;
-                    margin:10px;
-                    border-radius:5px;
-                    text-align:center;">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
+  {% if messages %}    
+    {% for message in messages %}
+      <center>{{ message }}</center>
+    {% endfor %}    
+  {% endif %}
+{% endwith %}
     {% block content %}
     <div class="container">
 
         <div class="welcome-card">
             <h1>Welcome to Dashboard</h1>
-
             <p>
                 Manage your Notes, Excel Data, and Files from one place.
             </p>
@@ -98,6 +81,5 @@
 
     </div>
     {% endblock %}
-
 </body>
 </html>

@@ -92,16 +92,16 @@
         }
     </style>
 </head>
-<body>
-
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages() %}
   {% if messages %}    
     {% for message in messages %}
       <center>{{ message }}</center>
     {% endfor %}    
   {% endif %}
 {% endwith %}
+<body>
+
+    <div class="container">
         <h2>Register</h2>
 
         <form action="/register" method="POST">
